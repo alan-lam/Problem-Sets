@@ -25,8 +25,7 @@
    (equal? grade "A")
    (equal? grade "B")
    (equal? grade "C")
-   )
-  )
+   ))
 
 (module+ test
   (check-equal? (canFlyLikeAGSix 90.7 16 "B")
