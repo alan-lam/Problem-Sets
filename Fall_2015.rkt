@@ -36,7 +36,11 @@
                 #t))
 
 ; PROBLEM 2 (modified)
-; The Space Boogers are throwing a surprise intergalactic karaoke party for Darth Vader! But poor Vady’s condition only allows him to sing no set of double letters per breath; otherwise, he’ll lose his voice. For example, “ll” in “hello” is a set of double letters. Any given String should be able to be sung in one breath, unless Vady loses his voice by means of a set of double letters. Find out if a given String will cause the Sith Lord to lose his voice!
+; The Space Boogers are throwing a surprise intergalactic karaoke party for Darth Vader!
+; But poor Vady’s condition only allows him to sing no set of double letters per breath;
+; otherwise, he’ll lose his voice. For example, “ll” in “hello” is a set of double letters.
+; Any given String should be able to be sung in one breath, unless Vady loses his voice by means of a set of double letters.
+;Find out if a given String will cause the Sith Lord to lose his voice!
 
 ; Examples:  
 ; Hello, goodbye => true  
