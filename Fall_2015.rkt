@@ -1,7 +1,7 @@
 #lang racket
 (require rackunit)
 
-; PROBLEM 1
+; PROBLEM 1 [easy]
 ; Pilot Warrick Flerpaderp is applying to get his flying license, but must pass TWO of the three following criteria:
 ;  - Weigh under 98.5 Sugarthian pounds
 ;  - Be at least 24 in Unicorn years
@@ -35,7 +35,7 @@
   (check-equal? (canFlyLikeAGSix 140.6 37 "A")
                 #t))
 
-; PROBLEM 2 (modified)
+; PROBLEM 2 (modified) [easy]
 ; The Space Boogers are throwing a surprise intergalactic karaoke party for Darth Vader!
 ; But poor Vady’s condition only allows him to sing no set of double letters per breath;
 ; otherwise, he’ll lose his voice. For example, “ll” in “hello” is a set of double letters.
@@ -59,7 +59,7 @@
   (check-equal? (soYouThinkYouCanSing "Livin' on a prayer")
                 #f))
 
-; PROBLEM 3
+; PROBLEM 3 [easy]
 ; First Mate Wendy Fuzzlebutt fell asleep while eating a caramel apple.
 ; Now her face is stuck so that the only vowel she can make is ‘u.’
 ; Given a String containing what First Mate Fuzzlebutt wants to say, return what she really says.
@@ -70,21 +70,42 @@
 ; “I am an AWESOME unicorn!” => “U um un UWUSUMU unucurn!”
 ; “Je suis allergique au citron” => “Ju suus ullurguquu uu cutrun”
 
-(define lowercase_vowels (list #\a #\e #\i #\o #\u))
-(define uppercase_vowels (list #\y #\A #\E #\I #\O #\U #\Y))
-
-(define (checkVowel c)
-  (if (member c lowercase_vowels)
-      #\u
-      (if (member c uppercase_vowels)
-          #\U
-          c)))
-
 (define (wuuUsMu uMu)
   (list->string (map checkVowel (string->list uMu))))
+
+(define (checkVowel c)
+  (if (member c (list #\a #\e #\i #\o #\u #\y))
+      #\u
+      (if (member c (list #\A #\E #\I #\O #\U #\Y))
+          #\U
+          c)))
 
 (module+ test
   (check-equal? (wuuUsMu "I am an AWESOME unicorn!")
                 "U um un UWUSUMU unucurn!")
   (check-equal? (wuuUsMu "Je suis allergique au citron")
                 "Ju suus ullurguquu uu cutrun"))
+
+; PROBLEM 4 [hard]
+; Navigator Wartha Umplebom loves eggs! But eggs are hard to find. They are hidden in many places.
+; She needs to identify the positions of the eggs so that she can eat them later.
+; Given a String, identify the indices of all “eggs” and output an int array containing these indices.
+; Only the number zero “0”, the lower case letter “o”, and the upper case letter “O” are considered “eggs”.
+
+; Each String is zero indexed, meaning that the first character has index 0, the second character has
+; index 1, etc. If there are no eggs, output an empty array.
+
+; Examples:
+; 120 => [2]
+; I love FOOD => [3, 8, 9]
+
+(define (honeyWhereAreMyEggs eggString)
+  (if (regexp-match? #rx"o|O|0" eggString)
+      (cons (car (first (regexp-match-positions #rx"o|O|0" eggString))) (honeyWhereAreMyEggs (regexp-replace #rx"o|O|0" eggString "a")))
+      '()))
+      
+(module+ test
+  (check-equal? (honeyWhereAreMyEggs "120")
+                '(2))
+  (check-equal? (honeyWhereAreMyEggs "I love FOOD")
+                '(3 8 9)))
