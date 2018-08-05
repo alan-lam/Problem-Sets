@@ -40,7 +40,7 @@
 ; But poor Vady’s condition only allows him to sing no set of double letters per breath;
 ; otherwise, he’ll lose his voice. For example, “ll” in “hello” is a set of double letters.
 ; Any given String should be able to be sung in one breath, unless Vady loses his voice by means of a set of double letters.
-;Find out if a given String will cause the Sith Lord to lose his voice!
+; Find out if a given String will cause the Sith Lord to lose his voice!
 
 ; Examples:  
 ; Hello, goodbye => true  
@@ -58,3 +58,33 @@
                 #t)
   (check-equal? (soYouThinkYouCanSing "Livin' on a prayer")
                 #f))
+
+; PROBLEM 3
+; First Mate Wendy Fuzzlebutt fell asleep while eating a caramel apple.
+; Now her face is stuck so that the only vowel she can make is ‘u.’
+; Given a String containing what First Mate Fuzzlebutt wants to say, return what she really says.
+
+; Preserve the case of any replaced vowels. Vowels include ‘a’, ‘e’, ‘i’, ‘o’, ‘u’, and ‘y’.
+
+; Examples:
+; “I am an AWESOME unicorn!” => “U um un UWUSUMU unucurn!”
+; “Je suis allergique au citron” => “Ju suus ullurguquu uu cutrun”
+
+(define lowercase_vowels (list #\a #\e #\i #\o #\u))
+(define uppercase_vowels (list #\y #\A #\E #\I #\O #\U #\Y))
+
+(define (checkVowel c)
+  (if (member c lowercase_vowels)
+      #\u
+      (if (member c uppercase_vowels)
+          #\U
+          c)))
+
+(define (wuuUsMu uMu)
+  (list->string (map checkVowel (string->list uMu))))
+
+(module+ test
+  (check-equal? (wuuUsMu "I am an AWESOME unicorn!")
+                "U um un UWUSUMU unucurn!")
+  (check-equal? (wuuUsMu "Je suis allergique au citron")
+                "Ju suus ullurguquu uu cutrun"))
