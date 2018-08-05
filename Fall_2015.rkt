@@ -109,3 +109,37 @@
                 '(2))
   (check-equal? (honeyWhereAreMyEggs "I love FOOD")
                 '(3 8 9)))
+
+; PROBLEM 5 [easy]
+; Engineer Wallace Lickalot has decreed that a number is considered “galactastic” if it is a palindrome
+; and contains 1 or more zeroes beginning from the center.
+; For example, “50505” is not considered galactastic, but “50005” is.
+
+; Given a number, find the next galactastic number that is strictly greater than the given number.
+
+; Examples:
+; 98 => 101
+; 4556 => 5005
+; 64986 => 65056
+
+(define (absolutelyGalactastic num)
+  (if (isGalactastic num)
+      num
+      (absolutelyGalactastic (+ num 1))))
+
+(define (isGalactastic num)
+  (if (or (= num 0) (= num 00))
+      #t
+      (if (equal? (first (string->list (number->string num))) (last (string->list (number->string num))))
+          (if (> (length (string->list (number->string num))) 2)
+              (isGalactastic (string->number (substring (number->string num) 1 (- (length (string->list (number->string num))) 1))))
+              #f)
+          #f)))
+
+(module+ test
+  (check-equal? (absolutelyGalactastic 98)
+                101)
+  (check-equal? (absolutelyGalactastic 4556)
+                5005)
+  (check-equal? (absolutelyGalactastic 64986)
+                65056))
