@@ -35,9 +35,9 @@
   (check-equal? (canFlyLikeAGSix 140.6 37 "A")
                 #t))
 
-; PROBLEM 2 (modified) [easy]
+; PROBLEM 2 (*modified) [easy]
 ; The Space Boogers are throwing a surprise intergalactic karaoke party for Darth Vader!
-; But poor Vady’s condition only allows him to sing no set of double letters per breath;
+; But poor Vady’s condition only allows him to sing no* set of double letters per breath;
 ; otherwise, he’ll lose his voice. For example, “ll” in “hello” is a set of double letters.
 ; Any given String should be able to be sung in one breath, unless Vady loses his voice by means of a set of double letters.
 ; Find out if a given String will cause the Sith Lord to lose his voice!
@@ -143,3 +143,42 @@
                 5005)
   (check-equal? (absolutelyGalactastic 64986)
                 65056))
+
+; PROBLEM 6 (*modified) [hard]
+; The Space Boogers accidentally crashed the S.S. Butter into the Sparksonian Museum and rotated
+; all the paintings in the process.  Help them restore the paintings to their upright positions before
+; the museum opens!  Given a painting represented by a (3x3)* 2D square array (where width equals
+; height), a number of times to rotate, and a direction to rotate, return the 2D array representing the
+; upright picture.
+
+; The direction will either be ‘L’ for left or ‘R’ for right.
+
+; Examples:  
+; [[2, 3, 4],          [[9, 1, 2],
+;  [1, 5, 3],           [0, 5, 3],
+;  [9, 0, 1]], 3, L  => [1, 3, 4]]
+
+#| Help: https://stackoverflow.com/questions/23177388/rotate-a-list-of-lists
+   It didn't occur to me that I could map the "first" function |#
+
+(define (makeMonaSmile painting numRotates direction)
+  (if (= (modulo numRotates 4) 0)
+      painting
+      (if (equal? direction "L")
+          (makeMonaSmile (rotateLeft painting) (- numRotates 1) direction)
+          (makeMonaSmile (rotateRight painting) (- numRotates 1) direction))))
+
+(define (rotateRight painting)
+  (append (list (map first (reverse painting))) (list (map second (reverse painting))) (list (map third (reverse painting)))))
+
+(define (rotateLeft painting)
+  (append (list (map third painting)) (list (map second painting)) (list (map first painting))))
+
+(module+ test
+  (check-equal? (makeMonaSmile (list (list 2 3 4) (list 1 5 3) (list 9 0 1)) 3 "L")
+                (list (list 9 1 2) (list 0 5 3) (list 1 3 4))))
+
+(module+ test
+  (check-equal? (makeMonaSmile (list (list 4 9 8) (list 3 0 5) (list 1 2 0)) 7 "R")
+                (list (list 8 5 0) (list 9 0 2) (list 4 3 1))))
+
