@@ -35,7 +35,7 @@
   (check-equal? (canFlyLikeAGSix 140.6 37 "A")
                 #t))
 
-; PROBLEM 2 (*modified) [easy]
+; PROBLEM 2 (*modified) [hard/easy]
 ; The Space Boogers are throwing a surprise intergalactic karaoke party for Darth Vader!
 ; But poor Vady’s condition only allows him to sing no* set of double letters per breath;
 ; otherwise, he’ll lose his voice. For example, “ll” in “hello” is a set of double letters.
@@ -182,3 +182,14 @@
   (check-equal? (makeMonaSmile (list (list 4 9 8) (list 3 0 5) (list 1 2 0)) 7 "R")
                 (list (list 8 5 0) (list 9 0 2) (list 4 3 1))))
 
+; PROBLEM 7 [hard] (halp!!!!!)
+; The Space Boogers are visiting the Death Star! They want to start a new prank trend among 
+; Stormtroopers to only use adherent sentences. In an adherent sentence, the nth word must differ 
+; from the (n-1)th word by exactly one letter, ignoring case. All words in the sentence must have the 
+; same length. Given a sentence, verify whether the sentence is adherent or not. 
+
+; Examples:
+; “Pot hot hog dog dot” =>  true
+; “Pot hot dog fog dot” =>  false
+
+; (define (weHaveCookies sentence))
