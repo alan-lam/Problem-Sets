@@ -211,7 +211,7 @@
 ; Navigator Wartha Umplebom has been separated from her Space Boogers!
 ; Luckily she still has her potadio (potato radio).
 ; She wants to contact her Space Boogers, but due to cosmic rays or whatever,
-; messages sent are distorted such that every other alphabetic character is shifted such that ‘a’ -> ‘b’,
+; messages sent are distorted such that every *other character is shifted such that ‘a’ -> ‘b’,
 ; ‘b’->’c’, ... , ‘z’->’a’, starting from the second alphabetic character in the string.
 ; Given Navigator Umplebom’s intended message, return the message the Space Boogers hear.
 
@@ -237,6 +237,6 @@
 
 (module+ test
   (check-equal? (pptbdjo "Aah, the atmosphere!")
-                "Abh, uhf btnotpiese!")#|*modified|#
+                "Abh, uhf btnotpiese!")
   (check-equal? (pptbdjo "He's dead, Jim.")
-                "Hf't eebd, Kin.")#|*modified|#)
+                "Hf't eebd, Kin."))
