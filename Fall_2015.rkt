@@ -193,3 +193,50 @@
 ; “Pot hot dog fog dot” =>  false
 
 ; (define (weHaveCookies sentence))
+
+; PROBLEM 8 [hard] (halp!!!!!)
+; In the midst of war, Sparkla has figured out how to control the clouds by labelling them with words.
+; They need to show their military might by casting a rainbow over enemy territory.
+; In order to do so, they must find a pair of anagram clouds.
+
+; Given an array of Strings, check if there exists at least one pair of anagrams in the array.
+
+; Examples:
+; [“cat”, “dog”, “act”] => true
+; [“cat”, “dog”, “bird”] => false
+
+; (define (thisIsSparrrklaaa words))
+
+; PROBLEM 9 (*modified) [hard]
+; Navigator Wartha Umplebom has been separated from her Space Boogers!
+; Luckily she still has her potadio (potato radio).
+; She wants to contact her Space Boogers, but due to cosmic rays or whatever,
+; messages sent are distorted such that every other alphabetic character is shifted such that ‘a’ -> ‘b’,
+; ‘b’->’c’, ... , ‘z’->’a’, starting from the second alphabetic character in the string.
+; Given Navigator Umplebom’s intended message, return the message the Space Boogers hear.
+
+; Preserve case so that ‘A’ -> ‘B’, etc.
+
+; Examples:
+; “Aah, the atmosphere!” => “Abh, uhf aumpsqhfrf!”
+; “He’s dead, Jim.” => “Hf’s eebd, Kin.”
+
+(define (pptbdjo message)
+  (if (empty? (string->list message))
+      empty
+      (if (= (length (string->list message)) 1)
+          message
+          (string-join (flatten (cons (list (make-string 1 (first (string->list message))) (shift (second (string->list message)))) (pptbdjo (list->string (rest (rest (string->list message))))))) ""))))
+
+(define (shift c)
+  (if (regexp-match? #rx"[a-y|A-Y]" (make-string 1 c))
+      (make-string 1 (integer->char (+ (char->integer c) 1)))
+      (if (regexp-match? #rx"[z|Z]" (make-string 1 c))
+          (make-string 1 (integer->char (- (char->integer c) 25)))
+          (make-string 1 c))))
+
+(module+ test
+  (check-equal? (pptbdjo "Aah, the atmosphere!")
+                "Abh, uhf btnotpiese!")#|*modified|#
+  (check-equal? (pptbdjo "He's dead, Jim.")
+                "Hf't eebd, Kin.")#|*modified|#)
