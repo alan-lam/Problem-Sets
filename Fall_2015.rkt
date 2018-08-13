@@ -256,7 +256,6 @@
       #f
       #t))
 
-
 (define (checkLetter unicorn message)
   (if (= (length (string->list message)) 0)
       (make-string 3 #\newline)
