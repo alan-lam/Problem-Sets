@@ -241,7 +241,7 @@
   (check-equal? (pptbdjo "He's dead, Jim.")
                 "Hf't eebd, Kin."))
 
-; PROBLEM 10
+; PROBLEM 10 [medium]
 ; First Mate Wendy Fuzzlebutt suspects that Captain Walter Flufflebottoms has been leaving her
 ; secret messages. She knows they are from him if the message contains the lowercase characters ‘u’,
 ; ‘n’, ‘i’, ‘c’, ‘o’, ‘r’, and ‘n’ in order. Return true if the message is from Walter. <3
@@ -252,20 +252,18 @@
 ; “UNICORN” => false
 
 (define (theSpaceshipHasSailed message)
-  (if (checkLetter #\u message)
-      ))
+  (if (equal? (checkLetter #\n (checkLetter #\r (checkLetter #\o (checkLetter #\c (checkLetter #\i (checkLetter #\n (checkLetter #\u message))))))) (make-string 3 #\newline))
+      #f
+      #t))
 
 
 (define (checkLetter unicorn message)
   (if (= (length (string->list message)) 0)
-      #f
+      (make-string 3 #\newline)
       (if (equal? unicorn (first (string->list message)))
-          #t
-          #f)))
+          (list->string (rest (string->list message)))
+          (checkLetter unicorn (list->string (rest (string->list message)))))))
 
-(theSpaceshipHasSailed "uaniacaoran")
-
-#|
 (module+ test
   (check-equal? (theSpaceshipHasSailed "Rock")
                 #f)
@@ -273,4 +271,3 @@
                 #t)
   (check-equal? (theSpaceshipHasSailed "UNICORN")
                 #f))
-|#
