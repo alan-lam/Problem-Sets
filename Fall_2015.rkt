@@ -240,3 +240,37 @@
                 "Abh, uhf btnotpiese!")
   (check-equal? (pptbdjo "He's dead, Jim.")
                 "Hf't eebd, Kin."))
+
+; PROBLEM 10
+; First Mate Wendy Fuzzlebutt suspects that Captain Walter Flufflebottoms has been leaving her
+; secret messages. She knows they are from him if the message contains the lowercase characters ‘u’,
+; ‘n’, ‘i’, ‘c’, ‘o’, ‘r’, and ‘n’ in order. Return true if the message is from Walter. <3
+
+; Examples:
+; “Rock” => false
+; “To unite all peoples within our nation! To denounce the evils of truth and love!” => true
+; “UNICORN” => false
+
+(define (theSpaceshipHasSailed message)
+  (if (checkLetter #\u message)
+      ))
+
+
+(define (checkLetter unicorn message)
+  (if (= (length (string->list message)) 0)
+      #f
+      (if (equal? unicorn (first (string->list message)))
+          #t
+          #f)))
+
+(theSpaceshipHasSailed "uaniacaoran")
+
+#|
+(module+ test
+  (check-equal? (theSpaceshipHasSailed "Rock")
+                #f)
+  (check-equal? (theSpaceshipHasSailed "To unite all peoples within our nation! To denounce the evils of truth and love!")
+                #t)
+  (check-equal? (theSpaceshipHasSailed "UNICORN")
+                #f))
+|#
